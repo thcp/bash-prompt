@@ -2,12 +2,12 @@
 
 function custom_prompt()
 {
-  if [ -d .terraform ]; then
-    workspace="$(command terraform workspace show 2>/dev/null)"
-    printf "\ntfws  : ${workspace}"
+  TFWS=$(command terraform workspace show 2>/dev/null)
+  if [ -n "$TFWS" ]; then
+    printf "\ntfws  : ${TFWS}"
   fi
-  if [ -d .git ]; then
-    branch="$(command git branch 2>/dev/null | grep "^*" | colrm 1 2)"
-    printf "\nbranch: ${branch}"
+  BRANCH="$(command git branch 2>/dev/null | grep "^*" | colrm 1 2)"
+  if [ -n "$BRANCH" ]; then
+    printf "\nbranch: ${BRANCH}"
   fi
 }
