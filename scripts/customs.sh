@@ -2,7 +2,7 @@
 
 function custom_prompt()
 {
-  TFWS=$(command terraform workspace show 2>/dev/null)
+  TFWS=$(command terraform workspace show 2>/dev/null | grep "^*")
   if [ -n "$TFWS" ]; then
     printf "\ntfws  : ${TFWS}"
   fi
